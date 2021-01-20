@@ -3,6 +3,6 @@ function [NG] = transformVectorFromlocalToGlobal(N, alfa)
     M = zeros(3);
     T = [R M;M R];
     NG = T*N;
-    disp(T);
-    disp(N);
+    #disp(T);
+    #disp(N);
 end
