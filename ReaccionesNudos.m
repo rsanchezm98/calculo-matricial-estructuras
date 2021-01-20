@@ -7,12 +7,12 @@ disp('*************************************');
 disp('REACCIONES GLOBALES EN LOS APOYOS');
 for i = 1:tablaConex.ident(end)
    esfuerzosGlobales{i} = transformVectorFromlocalToGlobal(esfuerzos{1,i}, tablaConex.alfa(i));
-    disp('*************************************');
-    disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO ORIGEN # : ' num2str(tablaConex.origen(i))]);
-    disp(esfuerzosGlobales{1,i}(1:3));
-    disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO FIN # : ' num2str(tablaConex.fin(i))]);
-    disp(esfuerzosGlobales{1,i}(4:6));
-    disp('*************************************');
+    %disp('*************************************');
+    %disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO ORIGEN # : ' num2str(tablaConex.origen(i))]);
+    %disp(esfuerzosGlobales{1,i}(1:3));
+    %disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO FIN # : ' num2str(tablaConex.fin(i))]);
+    %disp(esfuerzosGlobales{1,i}(4:6));
+    %disp('*************************************');
 end
 
 
