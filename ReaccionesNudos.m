@@ -1,18 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% usar despues de esfuerzosLocales
+% Autor: Rodrigo Sánchez Molina
+% Script: Obtención de las reacciones sobre los nudos del sistema. 
+% Fecha: 23/01/2021
+% Orden: 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 disp('*************************************');
 disp('REACCIONES GLOBALES EN LOS APOYOS');
 for i = 1:tablaConex.ident(end)
-   esfuerzosGlobales{i} = transformVectorFromlocalToGlobal(esfuerzos{1,i}, tablaConex.alfa(i));
-    %disp('*************************************');
-    %disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO ORIGEN # : ' num2str(tablaConex.origen(i))]);
-    %disp(esfuerzosGlobales{1,i}(1:3));
-    %disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO FIN # : ' num2str(tablaConex.fin(i))]);
-    %disp(esfuerzosGlobales{1,i}(4:6));
-    %disp('*************************************');
+   esfuerzosGlobales{i} = transformVectorFromlocalToGlobal(esfuerzos{1,i},...
+       tablaConex.alfa(i));
+%     disp('*************************************');
+%     disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO ORIGEN # : ' num2str(tablaConex.origen(i))]);
+%     disp(esfuerzosGlobales{1,i}(1:3));
+%     disp(['ESFUERZO en GLOBAL BARRA # ' num2str(i) ' NUDO FIN # : ' num2str(tablaConex.fin(i))]);
+%     disp(esfuerzosGlobales{1,i}(4:6));
+%     disp('*************************************');
 end
 
 
@@ -36,7 +41,7 @@ for i = 1:numNudos
 
 end
 
-
+% display de los nudos
 for i = 1:numNudos
    disp('*************************************');
    disp(['NUDO # : ' num2str(i)]);
