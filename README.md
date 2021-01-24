@@ -6,7 +6,9 @@ Este programa en MATLAB permite:
 * Obtener esfuerzos en locales y globales de cada barra.
 * Reacciones en los nudos. 
 * Obtener esfuerzos y fuerzas térmicas aplicados sobre la barra.
-* Ploteado de la matriz de rigidez ensamblada con los términos correspondientes independientes y necesarios para el cálculo matricial. ![alt text](https://github.com/rsanchezm98/calculo-matricial-estructuras/blob/mejora-1/imagenes/matriz-ensamblada.PNG)
+* Ploteado de la matriz de rigidez ensamblada con los términos correspondientes independientes y necesarios para el cálculo matricial.
+
+![alt text](https://github.com/rsanchezm98/calculo-matricial-estructuras/blob/mejora-1/imagenes/matriz-ensamblada.PNG)
 
 # Lanzamiento del programa
 1. Introducir los datos en el archivo [ensamblaje.m](https://github.com/rsanchezm98/calculo-matricial-estructuras/blob/main/ensamblaje.m) y lanzar el archivo. Se obtendrá la matriz de rigidez global ensamblada, las globales de cada barra y la matriz de rigidez reducida ensamblada de acuerdo a los desplazamientos no nulos independientes. 
