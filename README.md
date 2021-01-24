@@ -19,4 +19,4 @@ Este programa en MATLAB permite:
 3. Lanzar el archivo [ReaccionesNudos.m](https://github.com/rsanchezm98/calculo-matricial-estructuras/blob/main/ReaccionesNudos.m) para obtener las reacciones en los nudos en globales. 
 
 # Dudas y aportaciones
-Cualquier duda y aportación, ponerse en contacto con **Rodrigo Sánchez Molina** - [rsanchezm98](https://github.com/rsanchezm98)
+Cualquier duda y aportación, ponerse en contacto con **Rodrigo Sánchez Molina** - [rsanchezm98](https://github.com/rsanchezm98). Este programa se ha realizado para resolver los problemas de la asignatura de Cálculo y Diseño de Estructuras del Máster en Ingeniería Industrial de la Universidad Politécnica de Madrid. 
