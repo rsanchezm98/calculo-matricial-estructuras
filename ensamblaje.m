@@ -1,38 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Autor: Rodrigo Sánchez Molina
+% Script: Ensamblaje de matrices de rigidez del sistema
+% Fecha: 23/01/2021
+% Orden: 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Resolucion de problemas de ESTRUCTURAS
-%format long
-% introduccion de las variables del problema
-ident = [1; 2; 3; 4; 5]; % identificador de las barras
-origen = [1; 1; 3; 1; 3]; % nudo origen de las barras
-fin = [3; 2; 4; 5; 6]; % nudo fin de las barras
-numNudos = 6; % numero de nudos del sistema
-EA = [5; 5; 5; 5; 5]; % EA de cada barra (EA/EI en realidad si todo va a ir en funcion de EI)
-EI = [1; 1; 1; 1; 1]; % EI dejarlo a 1 si es todo en referencia de EI
-% si dan el valor de EA y EI meter EA y EI respectivamente
-L = [4; 5; 2; 5; 2]; % L de las barras
-alfa = [90; 0; 0; 180; 180]; % angulos
-% tipos 'artRig', 'rigArt', 'articuladas', 'rigidas'
-tipo = {'artRig'; 'artRig'; 'rigArt'; 'artRig'; 'rigArt'};
-tablaConex = table(ident,origen,fin,tipo,EA,EI,L,alfa);
-% ojo cada nudo es 3*3 luego tenlo en cuenta para poner su indice
-% ejemplo quiero el desplazamiento horizontal del nudo 3 luego tengo que poner el 3+3+1
-% = 7
-desp = [7,9]; %% desplazamientos objetivos
-despIndependientes = [7,9]; % desplazamientos independientes para la matriz reducida
-despNoIndependientes = [];
-relacionesIndependientesNoIndependientes = []; % se refiere a la posición
-% del vector desp con el signo que le corresponde por ejemplo: el 7 es el
-% negativo del desplazamiento 4, luego su valor en este vector es - 1
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-disp('*************************************');
-disp(tablaConex);
-disp('*************************************');
-% generacion de las matrices de rigidez
+%% generacion de las matrices de rigidez en globales
 for i = 1:tablaConex.ident(end)
     if strcmp(tablaConex.tipo(i),'artRig')
             K_{i} = artRig(tablaConex.EA(i), tablaConex.EI(i), tablaConex.L(i),...
@@ -58,10 +34,12 @@ for i = 1:size(K_, 2)
     disp(['MATRIZ DE RIGIDEZ DE LA BARRA: ' num2str(i)]);
     disp(K_{1,i})
 end
-% ensamblamos las matrices
+
+%% ensamblamos las matrices globales en la general
+
 K = zeros(numNudos*3); % creamos la matriz de rigidez ensamblada
 for i = 1:tablaConex.ident(end)
-    K = agregar_barra(cell2mat(K_(i)), tablaConex.origen(i), tablaConex.fin(i), K);
+    K = agregar_barra(K_{1,i}, tablaConex.origen(i), tablaConex.fin(i), K);
 end
 disp('*************************************');
 disp("MATRIZ DE RIGIDEZ GLOBAL ENSAMBLADA");
@@ -69,7 +47,6 @@ disp(K);
 disp('*************************************');
 
 %% matriz simplificada
-
 K_simp = [];
 for i = despIndependientes
     aux_ = [];
@@ -78,7 +55,7 @@ for i = despIndependientes
         end
     K_simp(end+1,:) = aux_;
 end
-% el orden es el indicado en despIndependientes que deberia estar ordenado
+
 disp('*************************************');
 disp("MATRIZ DE RIGIDEZ SIMPLIFICADA SIN SUMAR");
 disp(K_simp);
@@ -98,11 +75,12 @@ for i = 1:size(despIndependientes,2)
         end
     
 end
-K_end =K_simp(:,1:size(despIndependientes,2));
+
+K_end = K_simp(:,1:size(despIndependientes,2));
 disp('*************************************');
 disp("MATRIZ DE RIGIDEZ SIMPLIFICADA SUMADA");
 disp(K_end);
 disp('*************************************');
 
-
-
+% ploteo de los terminos que necesito de la matriz de rigidez
+ensamblaPlot(desp,despIndependientes,K,tablaConex); 
