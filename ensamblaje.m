@@ -64,14 +64,19 @@ disp('*************************************');
 for i = 1:size(despIndependientes,2)
     disp(i)
         id = find(relacionesIndependientesNoIndependientes == i);
+        
         if (size(id)>0)
-            disp(['sumo columna: ', num2str(i), ' con columna: ', num2str(id+size(despIndependientes,2))]);
-            K_simp(:,i) = K_simp(:,i) + K_simp(:,id+size(despIndependientes,2));
+            for j = id
+                disp(['sumo columna: ', num2str(i), ' con columna: ', num2str(j+size(despIndependientes,2))]);
+                K_simp(:,i) = K_simp(:,i) + K_simp(:,j+size(despIndependientes,2));
+            end
         end
         id = find(relacionesIndependientesNoIndependientes == -1*i);
         if (size(id)>0)
-            disp(['resto columna: ', num2str(i), ' con columna: ', num2str(id+size(despIndependientes,2))]);
-            K_simp(:,i) = K_simp(:,i) - K_simp(:,id+size(despIndependientes,2));
+            for j = id
+                disp(['resto columna: ', num2str(i), ' con columna: ', num2str(j+size(despIndependientes,2))]);
+                K_simp(:,i) = K_simp(:,i) - K_simp(:,j+size(despIndependientes,2));
+            end
         end
     
 end

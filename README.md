@@ -7,7 +7,6 @@ Este programa en MATLAB permite:
 * Obtener esfuerzos en locales y globales de cada barra.
 * Reacciones en los nudos. 
 * Obtener esfuerzos y fuerzas térmicas aplicados sobre las barras.
-* Se añade un archivo de ensamblaje de matrices simbólicas. Es decir, en función de parámetros. 
 
 
 

@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Obtención de desplazamientos
-F = [15.625;25]; % introduce el vector de fuerzas obtenido
+F = [0;-7.0125;3.50625;-25.5]; % introduce el vector de fuerzas obtenido
 
 x = linsolve(K_end,F);
 disp('*************************************');
@@ -19,15 +19,19 @@ end
 disp('*************************************');
 
 disp('DESPLAZAMIENTOS DE LOS NO INDEPENDIENTES');
-x_Dep = [];
+x_Dep = zeros(size(despNoIndependientes,1));
 for i = 1:size(despIndependientes,2)
         id = find(relacionesIndependientesNoIndependientes == i);
         if (size(id)>0)
-            x_Dep(end+1) = x(i);
+            for j = id
+                x_Dep(j) = x(i);
+            end
         end
         id = find(relacionesIndependientesNoIndependientes == -1*i);
         if (size(id)>0)
-            x_Dep(end+1) = -1*x(i);
+            for j = id
+                x_Dep(j) = -1*x(i);
+            end
         end
 end
 for i = 1:size(x_Dep,2)
@@ -39,7 +43,7 @@ disp('*************************************');
 
 %% el vector global de desplazamientos es:
 desplazamientos = zeros(numNudos*3,1);
-% desplazamientos(3) = 1; % si se impone un giro meterlo aquí
+ 
 for i = desp
     id = find(despIndependientes == i);
     if (size(id)>0) 
@@ -89,21 +93,22 @@ disp('HAY QUE SUMARLE LAS FUERZAS EXTERNAS');
 % modificamos el vector de esfuerzos esfuerzos{1,i} sumandole lo
 % correspondiente a las fuerzas aplicadas a lo largo de la barra
 
-% esfuerzos{1,1} = esfuerzos{1,1} + [0; 0.0145313; 0.019687; 0; 0.010468; 0];
-% esfuerzos{1,2} = esfuerzos{1,2} + [0; 55e3; 42426.4; 0; 25e3; 0];
+% esfuerzos{1,1} = esfuerzos{1,1} + [0; 14.531; 19.6875; 0; 10.64688; 0];
+ esfuerzos{1,2} = esfuerzos{1,2} + [0;12.75; 3.50625;0; 12.75; -3.50625];
 % esfuerzos{1,3} = esfuerzos{1,3} + [0; -12.5; -15.625; 0; -12.5; 15.625];
 % esfuerzos{1,4} = esfuerzos{1,4} + [0; 55e3; 42426.4; 0; 25e3; 0];
-% esfuerzos{1,5} = esfuerzos{1,5} + [0; -0.4297; 0; 0; -4.5703; 1.6407];
+ esfuerzos{1,5} = esfuerzos{1,5} + [0 ; -12.75; -3.50625;0; -12.75; 3.50625];
 % esfuerzos{1,6} = esfuerzos{1,6} + [0; 12.5; 15.625; 0; 12.5; -15.625];
 % esfuerzos{1,7} = esfuerzos{1,7} + [0; 5/2; 2; 0; 15/8; 0];
-% esfuerzos{1,8} = esfuerzos{1,8} + [0; 55e3; 42426.4; 0; 25e3; 0];
+ esfuerzos{1,8} = esfuerzos{1,8} + [0; -12.75; -3.50625;0; -12.75; 3.50625];
+ esfuerzos{1,11} = esfuerzos{1,11} + [0;12.75;3.50625;0; 12.75; -3.50625];
 
 % modificamos el vector de esfuerzos añadiendo las fuerzas aplicadas debido
 % a la temperatura. 
-% esfuerzos{1,1} = esfuerzos{1,1} + Tempo{1,1};
-% esfuerzos{1,2} = esfuerzos{1,2} + Tempo{1,2};
-% esfuerzos{1,3} = esfuerzos{1,3} + Tempo{1,3};
-% esfuerzos{1,4} = esfuerzos{1,4} + Tempo{1,4};
+%  esfuerzos{1,1} = esfuerzos{1,1} + Tempo{1,1};
+%  esfuerzos{1,2} = esfuerzos{1,2} + Tempo{1,2};
+%  esfuerzos{1,3} = esfuerzos{1,3} + Tempo{1,3};
+%  esfuerzos{1,4} = esfuerzos{1,4} + Tempo{1,4};
 % esfuerzos{1,5} = esfuerzos{1,5} + Tempo{1,5};
 
 
